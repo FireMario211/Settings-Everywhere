@@ -1,11 +1,11 @@
 {
-	"geode": "3.2.0",
+	"geode": "3.4.0",
 	"gd": {
 		"win": "2.206",
 		"mac": "2.206",
 		"android": "2.206"
 	},
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"id": "alphalaneous.settings_everywhere",
 	"name": "Settings Everywhere",
 	"developer": "Alphalaneous",
@@ -15,6 +15,11 @@
 			"resources/*"
 		]
 	},
+	"links": {
+        "homepage": "https://twitter.com/alphalaneous",
+        "source": "https://github.com/Alphalaneous/Settings-Everywhere",
+        "community": "https://discord.gg/Txn2CA5dHF"
+    },
 	"dependencies": [
         {
             "id": "geode.node-ids",
