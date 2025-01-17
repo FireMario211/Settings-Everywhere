@@ -4,6 +4,8 @@
 #include <Geode/modify/GJDropDownLayer.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/modify/EditLevelLayer.hpp>
+#include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
+#include <alphalaneous.alphas_geode_utils/include/Utils.h>
 
 using namespace geode::prelude;
 
@@ -151,4 +153,20 @@ class $modify(MyEditLevelLayer, EditLevelLayer){
 	void onMainOptions(CCObject* obj){
         showOptions();
     }
+};
+
+class $nodeModify(MyModSettingsPopup, ModSettingsPopup) {
+
+	void modify() {
+		auto layerOpt = AlphaUtils::Cocos::getLayerByClassName("ModPopup");
+		if (!layerOpt.has_value()) return;
+
+		if (layerOpt.value()->getID() == "geode.loader/popup-alphalaneous.settings_everywhere") {
+			queueInMainThread([this] {
+				removeFromParent();
+			});
+
+        	showOptions();
+		}
+	}
 };
