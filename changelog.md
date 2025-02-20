@@ -1,3 +1,6 @@
+# 1.0.4
+- Hook Prio fix
+
 # 1.0.3
 - Made the mod settings button also open settings cuz it's funny
 

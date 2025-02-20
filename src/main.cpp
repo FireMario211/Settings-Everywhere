@@ -19,11 +19,11 @@ class $modify(MyGJDropDownLayer, GJDropDownLayer){
         (void) self.setHookPriority("GJDropDownLayer::showLayer", INT_MIN);
     }
 
-    void setOnScene(bool onScene){
+    void setOnScene(bool onScene) {
         m_fields->m_onScene = onScene;
     }
 
-    void showLayer(bool p0){
+    void showLayer(bool p0) {
         
         GJDropDownLayer::showLayer(p0);
         if(m_fields->m_onScene){
@@ -40,7 +40,7 @@ void showOptions(){
 
 	int z = CCDirector::get()->getRunningScene()->getHighestChildZ();
 
-	if(z == INT_MAX) {
+	if (z == INT_MAX) {
 		log::info("Z is INT_MAX what the heck man, please yell at the dev that caused this (not me)");
 		return;
 	}
@@ -59,7 +59,7 @@ class $modify(MyPauseLayer, PauseLayer) {
 		CCMenuItemSpriteExtra* button = CCMenuItemSpriteExtra::create(settings, this, menu_selector(MyPauseLayer::onOptions));
 		button->setID("main-options"_spr);
 
-		if(CCNode* rightButtonMenu = getChildByID("right-button-menu")){
+		if (CCNode* rightButtonMenu = getChildByID("right-button-menu")) {
 			rightButtonMenu->addChild(button);
 			rightButtonMenu->updateLayout();
 		}
@@ -73,9 +73,13 @@ class $modify(MyPauseLayer, PauseLayer) {
 
 class $modify(MyLevelInfoLayer, LevelInfoLayer) {
 
-    bool init(GJGameLevel* level, bool challenge){
+	static void onModify(auto& self) {
+        (void) self.setHookPriorityBeforePost("LevelInfoLayer::init", "capeling.soggy-mod");
+    }
 
-		if(!LevelInfoLayer::init(level, challenge)){
+    bool init(GJGameLevel* level, bool challenge) {
+
+		if (!LevelInfoLayer::init(level, challenge)) {
 			return false;
 		}
 
@@ -88,24 +92,25 @@ class $modify(MyLevelInfoLayer, LevelInfoLayer) {
 		button->m_duration = 0.2f;
 		button->m_unselectedDuration = 0.2f;
 		button->setID("main-options"_spr);
+		button->setZOrder(-10);
 		button->setPosition({-45, 0});
 
-		if(CCNode* settingsMenu = getChildByID("garage-menu")){
+		if (CCNode* settingsMenu = getChildByID("garage-menu")) {
 			settingsMenu->addChild(button);
 		}
 
 		return true;
 	}
 
-	void onOptions(CCObject* obj){
+	void onOptions(CCObject* obj) {
         showOptions();
     }
 };
 
-class $modify(MyEditorPauseLayer, EditorPauseLayer){
+class $modify(MyEditorPauseLayer, EditorPauseLayer) {
 
 	bool init(LevelEditorLayer* p0){
-		if(!EditorPauseLayer::init(p0)) {
+		if (!EditorPauseLayer::init(p0)) {
 			return false;
 		}
 
@@ -115,7 +120,7 @@ class $modify(MyEditorPauseLayer, EditorPauseLayer){
 		CCMenuItemSpriteExtra* button = CCMenuItemSpriteExtra::create(settings, this, menu_selector(MyEditorPauseLayer::onMainOptions));
 		button->setID("main-options"_spr);
 
-		if(CCNode* guidelinesMenu = getChildByID("guidelines-menu")){
+		if (CCNode* guidelinesMenu = getChildByID("guidelines-menu")) {
 			guidelinesMenu->addChild(button);
 			guidelinesMenu->updateLayout();
 		}
@@ -123,16 +128,16 @@ class $modify(MyEditorPauseLayer, EditorPauseLayer){
 		return true;
 	}
 
-	void onMainOptions(CCObject* obj){
+	void onMainOptions(CCObject* obj) {
         showOptions();
     }
 };
 
-class $modify(MyEditLevelLayer, EditLevelLayer){
+class $modify(MyEditLevelLayer, EditLevelLayer) {
 
-	bool init(GJGameLevel* p0){
+	bool init(GJGameLevel* p0) {
 
-		if(!EditLevelLayer::init(p0)) {
+		if (!EditLevelLayer::init(p0)) {
 			return false;
 		}
 
@@ -142,7 +147,7 @@ class $modify(MyEditLevelLayer, EditLevelLayer){
 		CCMenuItemSpriteExtra* button = CCMenuItemSpriteExtra::create(settings, this, menu_selector(MyEditLevelLayer::onMainOptions));
 		button->setID("main-options"_spr);
 
-		if(CCNode* levelActionsMenu = getChildByID("level-actions-menu")){
+		if (CCNode* levelActionsMenu = getChildByID("level-actions-menu")) {
 			levelActionsMenu->insertBefore(button, levelActionsMenu->getChildByID("help-button"));
 			levelActionsMenu->updateLayout();
 		}
