@@ -5,7 +5,7 @@
 		"mac": "2.2074",
 		"android": "2.2074"
 	},
-	"version": "v1.0.4",
+	"version": "v1.0.5",
 	"id": "alphalaneous.settings_everywhere",
 	"name": "Settings Everywhere",
 	"developer": "Alphalaneous",
@@ -39,5 +39,8 @@
             "type": "bool",
             "default": true
 		}
-	}
+	},
+	"tags": [
+		"interface", "enhancement", "utility"
+	]
 }

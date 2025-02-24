@@ -1,3 +1,6 @@
+# 1.0.5
+- Add tags
+
 # 1.0.4
 - Hook Prio fix
 
